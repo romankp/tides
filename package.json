@@ -1,0 +1,31 @@
+{
+  "name": "tides",
+  "version": "2.0.0",
+  "description": "New versoion of tides",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html --out-dir dist/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/romankp/tides.git"
+  },
+  "keywords": [
+    "tides"
+  ],
+  "author": "Roman Pougatchev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/romankp/tides/issues"
+  },
+  "homepage": "https://github.com/romankp/tides#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  }
+}

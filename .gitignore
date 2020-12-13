@@ -8,3 +8,4 @@ dist
 !.editorconfig
 
 package-lock.json
+constants.js

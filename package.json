@@ -20,8 +20,8 @@
     "url": "https://github.com/romankp/tides/issues"
   },
   "homepage": "https://github.com/romankp/tides#readme",
+  "browserslist": "last 1 Chrome version, last 1 Firefox version",
   "devDependencies": {
-    "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.10",
     "@babel/preset-react": "^7.12.10",

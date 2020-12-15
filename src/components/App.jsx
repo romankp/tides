@@ -1,5 +1,5 @@
-import React from 'react';
-import { key, stationId } from '../constants.js';
+import React from "react";
+import { key, stationId } from "../constants.js";
 
 const App = () => (
   <React.Fragment>

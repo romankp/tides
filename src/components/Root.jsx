@@ -1,5 +1,6 @@
-import React, { Component, Fragment } from 'react';
-import { baseUrl, stationId } from '../constants.js';
+import React, { Component } from 'react';
+import { baseUrl, stationId } from '../utils/constants.js';
+import { localizeTime } from '../utils/parsers.js';
 
 // const startDate = 20201216;
 // const endDate = 20201217;
@@ -46,15 +47,10 @@ class Root extends Component {
       <div className={`main${loaded && ' show'}`}>
         <h1>Tides</h1>
         <h2>Today / {currentDate}</h2>
-        {predictionsArray.map((prediction) => {
-          const timeString = new Date(prediction.t);
-          const localizedTime = timeString.toLocaleTimeString('en-US', {
-            hour: '2-digit',
-            minute: '2-digit'
-          });
+        {predictionsArray.map(({ t, type }) => {
           return (
-            <p key={prediction.t}>
-              {prediction.type} {localizedTime}
+            <p key={t}>
+              {type} {localizeTime(t)}
             </p>
           );
         })}

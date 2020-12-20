@@ -1,11 +1,5 @@
-@import './components/Root.less';
-
-/* Normalizer */
-* {
-  margin: 0;
-  padding: 0;
-  border: none;
-}
+@import './style/colors.less';
+@import './style/normalizer.less';
 
 /* Base */
 body {
@@ -13,9 +7,15 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: linear-gradient(-10deg, @base-blue, @base-violet);
 }
 
-/* Root */
 #root {
-  width: 800px;
+  max-width: 700px;
+  background-color: white;
+  border-radius: 8px;
+  padding: 48px;
 }
+
+// Components
+@import './components/Root.less';

@@ -36,12 +36,12 @@ class Root extends Component {
     return (
       <Fragment>
         <h1>Tides</h1>
+        <h2>Today</h2>
         {this.state.predictionsArray.map((prediction) => (
           <p key={prediction.t}>
             {prediction.type} {prediction.t}
           </p>
         ))}
-        <p>{urlToday}</p>
       </Fragment>
     );
   }

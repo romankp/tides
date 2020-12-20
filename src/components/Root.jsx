@@ -18,6 +18,12 @@ class Root extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentDate: new Date().toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        timeZone: 'est'
+      }),
       predictionsArray: []
     };
   }
@@ -36,7 +42,7 @@ class Root extends Component {
     return (
       <Fragment>
         <h1>Tides</h1>
-        <h2>Today</h2>
+        <h2>Today {this.state.currentDate}</h2>
         {this.state.predictionsArray.map((prediction) => (
           <p key={prediction.t}>
             {prediction.type} {prediction.t}

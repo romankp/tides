@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { baseUrl, stationId } from '../utils/constants.js';
-import { localizeTime } from '../utils/parsers.js';
+import { getCurrentDate } from '../utils/parsers.js';
+import Today from './Today';
 
 // const startDate = 20201216;
 // const endDate = 20201217;
@@ -15,16 +16,20 @@ const fetchTideData = async (url) => {
   return data;
 };
 
+const returnCurrentDate = () => {
+  return new Date().toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    timeZone: 'est'
+  });
+};
+
 class Root extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentDate: new Date().toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        timeZone: 'est'
-      }),
+      currentDate: returnCurrentDate(),
       loaded: false,
       predictionsArray: []
     };
@@ -33,7 +38,6 @@ class Root extends Component {
   componentDidMount() {
     fetchTideData(urlToday).then((data) => {
       const { predictions } = data;
-      console.log(JSON.stringify(predictions));
       this.setState({
         predictionsArray: predictions,
         loaded: true
@@ -46,14 +50,7 @@ class Root extends Component {
     return (
       <div className={`main${loaded && ' show'}`}>
         <h1>Tides</h1>
-        <h2>Today / {currentDate}</h2>
-        {predictionsArray.map(({ t, type }) => {
-          return (
-            <p key={t}>
-              {type} {localizeTime(t)}
-            </p>
-          );
-        })}
+        <Today predictions={predictionsArray} date={getCurrentDate()} />
       </div>
     );
   }

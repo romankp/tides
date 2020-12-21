@@ -1,3 +1,12 @@
+const getCurrentDate = () => {
+  return new Date().toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    timeZone: 'est'
+  });
+};
+
 const localizeTime = (time) => {
   const timeString = new Date(time);
   const localizedTime = timeString.toLocaleTimeString('en-US', {
@@ -7,4 +16,4 @@ const localizeTime = (time) => {
   return localizedTime;
 };
 
-export { localizeTime };
+export { getCurrentDate, localizeTime };

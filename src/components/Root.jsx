@@ -16,20 +16,11 @@ const fetchTideData = async (url) => {
   return data;
 };
 
-const returnCurrentDate = () => {
-  return new Date().toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    timeZone: 'est'
-  });
-};
-
 class Root extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentDate: returnCurrentDate(),
+      currentDate: getCurrentDate(),
       loaded: false,
       predictionsArray: []
     };
@@ -50,7 +41,7 @@ class Root extends Component {
     return (
       <div className={`main${loaded && ' show'}`}>
         <h1>Tides</h1>
-        <Today predictions={predictionsArray} date={getCurrentDate()} />
+        <Today predictions={predictionsArray} date={currentDate} />
       </div>
     );
   }

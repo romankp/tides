@@ -1,12 +1,17 @@
 import React, { Component, Fragment } from 'react';
-import { baseUrl, stationId } from '../utils/constants.js';
+import {
+  baseUrl,
+  stationId,
+  paramsToday,
+  paramsFull
+} from '../utils/constants.js';
 import { getCurrentDate } from '../utils/parsers.js';
 import Today from './Today';
 
 // const startDate = 20201216;
 // const endDate = 20201217;
-// const urlFull = `${baseUrl}?station=${stationId}&datum=STND&time_zone=lst&begin_date=${startDate}&end_date=${endDate}&units=english&format=json&product=predictions&interval=hilo`;
-const urlToday = `${baseUrl}?station=${stationId}&datum=STND&time_zone=lst&date=today&units=english&format=json&product=predictions&interval=hilo`;
+const urlFull = `${baseUrl}?station=${stationId}${paramsFull}`;
+const urlToday = `${baseUrl}?station=${stationId}${paramsToday}`;
 
 const fetchTideData = async url => {
   const response = await fetch(url).catch(e => {
@@ -36,14 +41,14 @@ class Root extends Component {
         this.setState({
           loaded: true
         });
-      }, 3000);
+      }, 2000);
     });
   }
 
   render() {
     let { loaded, currentDate, predictionsArray } = this.state;
     return (
-      <div className={`main${loaded && ' show'}`}>
+      <div className={`main${loaded ? ' show' : ''}`}>
         <h1>Tides</h1>
         <Today predictions={predictionsArray} date={currentDate} />
       </div>

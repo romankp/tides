@@ -8,8 +8,8 @@ import Today from './Today';
 // const urlFull = `${baseUrl}?station=${stationId}&datum=STND&time_zone=lst&begin_date=${startDate}&end_date=${endDate}&units=english&format=json&product=predictions&interval=hilo`;
 const urlToday = `${baseUrl}?station=${stationId}&datum=STND&time_zone=lst&date=today&units=english&format=json&product=predictions&interval=hilo`;
 
-const fetchTideData = async (url) => {
-  const response = await fetch(url).catch((e) => {
+const fetchTideData = async url => {
+  const response = await fetch(url).catch(e => {
     console.error(`Fetch request failed: ${e}`);
   });
   const data = await response.json();
@@ -27,12 +27,16 @@ class Root extends Component {
   }
 
   componentDidMount() {
-    fetchTideData(urlToday).then((data) => {
+    fetchTideData(urlToday).then(data => {
       const { predictions } = data;
       this.setState({
-        predictionsArray: predictions,
-        loaded: true
+        predictionsArray: predictions
       });
+      setTimeout(() => {
+        this.setState({
+          loaded: true
+        });
+      }, 3000);
     });
   }
 

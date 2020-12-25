@@ -12,6 +12,7 @@ import Today from './Today';
 // const endDate = 20201217;
 const urlFull = `${baseUrl}?station=${stationId}${paramsFull}`;
 const urlToday = `${baseUrl}?station=${stationId}${paramsToday}`;
+const nextEvent = 'high 8:03 PM';
 
 const fetchTideData = async url => {
   const response = await fetch(url).catch(e => {
@@ -51,6 +52,10 @@ class Root extends Component {
       <div className={`main${loaded ? ' show' : ''}`}>
         <h1>Tides</h1>
         <Today predictions={predictionsArray} date={currentDate} />
+        <div className="next">
+          <h2>Next Event</h2>
+          <p>{nextEvent}</p>
+        </div>
       </div>
     );
   }

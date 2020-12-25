@@ -62,7 +62,7 @@ class Root extends Component {
       loaded,
       currentDate,
       predictionsArray,
-      nextEvent: { t }
+      nextEvent: { t, type }
     } = this.state;
     return (
       <div className={`main${loaded ? ' show' : ''}`}>
@@ -70,7 +70,9 @@ class Root extends Component {
         <Today predictions={predictionsArray} date={currentDate} />
         <div className="next">
           <h2>Next Event</h2>
-          <p>{localizeTime(t)}</p>
+          <p>
+            {type} {localizeTime(t)}
+          </p>
         </div>
       </div>
     );

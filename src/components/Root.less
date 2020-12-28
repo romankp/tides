@@ -5,6 +5,11 @@
   border-radius: 0 @radius @radius;
   padding: 48px;
   box-shadow: 4px 4px 4px 4px rgba(17, 52, 120, 0.2);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  &.show {
+    opacity: 1;
+  }
 }
 
 h1 {

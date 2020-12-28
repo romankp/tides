@@ -44,7 +44,7 @@ class Root extends Component {
         this.setState({
           loaded: true
         });
-      }, 2000);
+      }, 500);
       const nextPrediction =
         this.state.predictionsArray.find(({ t }) => {
           const predictionDate = new Date(t);

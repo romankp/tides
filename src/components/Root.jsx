@@ -10,6 +10,7 @@ import Today from './Today';
 
 // const startDate = 20201216;
 // const endDate = 20201217;
+// TODO: use specific dates instead of "today" parameter as EST/EDT is several hours behind
 const urlFull = `${baseUrl}?station=${stationId}${paramsFull}`;
 const urlToday = `${baseUrl}?station=${stationId}${paramsToday}`;
 const currentTime = Date.now();
@@ -62,18 +63,24 @@ class Root extends Component {
       loaded,
       currentDate,
       predictionsArray,
-      nextEvent: { t, type }
+      // nextEvent: { t, type }
+      nextEvent
     } = this.state;
+    console.log(nextEvent);
     return (
       <div className={`main${loaded ? ' show' : ''}`}>
         <h1>Tides</h1>
-        <Today predictions={predictionsArray} date={currentDate} />
-        <div className="next">
+        <Today
+          predictions={predictionsArray}
+          date={currentDate}
+          nextEvent={nextEvent}
+        />
+        {/* <div className="next">
           <h2>Next Event</h2>
           <p>
             {type} {localizeTime(t)}
           </p>
-        </div>
+        </div> */}
       </div>
     );
   }

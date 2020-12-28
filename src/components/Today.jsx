@@ -7,14 +7,23 @@ const hilo = {
   L: 'low'
 };
 
-const Today = ({ predictions, date }) => {
+const checkNext = (thisType, thisTime, nextEvent) => {
+  if (thisType === nextEvent.type && thisTime === nextEvent.t) {
+    return true;
+  }
+  return false;
+};
+
+const Today = ({ predictions, date, nextEvent }) => {
   return (
     <Fragment>
       <h2>Today / {date}</h2>
+      {/* TODO create solution for nextEvent when next day */}
       <ol>
         {predictions.map(({ type, t }) => {
+          const isNext = checkNext(type, t, nextEvent);
           return (
-            <li key={t}>
+            <li key={`${type}${t}`} className={isNext ? 'isNext' : ''}>
               {hilo[type]} {localizeTime(t)}
             </li>
           );
@@ -26,7 +35,8 @@ const Today = ({ predictions, date }) => {
 
 Today.propTypes = {
   predictions: PropTypes.array,
-  date: PropTypes.string
+  date: PropTypes.string,
+  nextEvent: PropTypes.object
 };
 
 export default Today;

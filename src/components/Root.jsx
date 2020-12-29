@@ -8,13 +8,14 @@ import {
 import { getCurrentDate, localizeTime } from '../utils/parsers.js';
 import Today from './Today';
 
-// const startDate = 20201216;
-// const endDate = 20201217;
+const startDate = 20201228;
+const endDate = 20201229;
 // TODO: use specific dates instead of "today" parameter as EST/EDT is several hours behind
-const urlFull = `${baseUrl}?station=${stationId}${paramsFull}`;
-const urlToday = `${baseUrl}?station=${stationId}${paramsToday}`;
+const urlFull = `${baseUrl}?station=${stationId}${`&datum=STND&time_zone=lst&begin_date=${startDate}&end_date=${endDate}&units=english&format=json&product=predictions&interval=hilo`}`;
+// const urlToday = `${baseUrl}?station=${stationId}${paramsToday}`;
 const currentTime = Date.now();
-// const nextEvent = 'high 8:03 PM';
+
+// console.log(urlFull);
 
 const fetchTideData = async url => {
   const response = await fetch(url).catch(e => {
@@ -36,7 +37,7 @@ class Root extends Component {
   }
 
   componentDidMount() {
-    fetchTideData(urlToday).then(data => {
+    fetchTideData(urlFull).then(data => {
       const { predictions } = data;
       this.setState({
         predictionsArray: predictions
@@ -59,13 +60,7 @@ class Root extends Component {
   }
 
   render() {
-    let {
-      loaded,
-      currentDate,
-      predictionsArray,
-      // nextEvent: { t, type }
-      nextEvent
-    } = this.state;
+    let { loaded, currentDate, predictionsArray, nextEvent } = this.state;
     console.log(nextEvent);
     return (
       <div className={`main${loaded ? ' show' : ''}`}>
@@ -75,12 +70,6 @@ class Root extends Component {
           date={currentDate}
           nextEvent={nextEvent}
         />
-        {/* <div className="next">
-          <h2>Next Event</h2>
-          <p>
-            {type} {localizeTime(t)}
-          </p>
-        </div> */}
       </div>
     );
   }

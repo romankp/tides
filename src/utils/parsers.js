@@ -9,18 +9,19 @@ const getCurrentDate = () => {
 
 const constructStart = date => {
   const today = new Date(date);
-  const year = today.getFullYear();
-  const month = today.getMonth();
-  const day = today.getDate();
-  return `${year}${month + 1}${day}`;
+  return returnQueryDateString(today);
 };
 
 const constructEnd = date => {
   const today = new Date(date);
   today.setDate(today.getDate() + 1);
-  const year = today.getFullYear();
-  const month = today.getMonth();
-  const day = today.getDate();
+  return returnQueryDateString(today);
+};
+
+const returnQueryDateString = date => {
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const day = date.getDate();
   return `${year}${month + 1}${day}`;
 };
 

@@ -1,21 +1,16 @@
 import React, { Component, Fragment } from 'react';
+import { baseUrl, stationId } from '../utils/constants.js';
 import {
-  baseUrl,
-  stationId,
-  paramsToday,
-  paramsFull
-} from '../utils/constants.js';
-import { getCurrentDate, constructStart } from '../utils/parsers.js';
+  getCurrentDate,
+  constructStart,
+  constructEnd
+} from '../utils/parsers.js';
 import Today from './Today';
 
 const currentTime = Date.now();
 const startDate = constructStart(currentTime);
-const endDate = 20201229;
-// TODO: use specific dates instead of "today" parameter as EST/EDT is several hours behind
+const endDate = constructEnd(currentTime);
 const urlFull = `${baseUrl}?station=${stationId}${`&datum=STND&time_zone=lst&begin_date=${startDate}&end_date=${endDate}&units=english&format=json&product=predictions&interval=hilo`}`;
-// const urlToday = `${baseUrl}?station=${stationId}${paramsToday}`;
-
-// console.log(urlFull);
 
 const fetchTideData = async url => {
   const response = await fetch(url).catch(e => {
@@ -24,10 +19,6 @@ const fetchTideData = async url => {
   const data = await response.json();
   return data;
 };
-
-// constructStart();
-
-// console.log(constructStart());
 
 class Root extends Component {
   constructor(props) {

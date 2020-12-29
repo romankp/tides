@@ -7,15 +7,12 @@ const getCurrentDate = () => {
   });
 };
 
-const constructStart = date => {
-  const today = new Date(date);
-  return returnQueryDateString(today);
-};
-
-const constructEnd = date => {
-  const today = new Date(date);
-  today.setDate(today.getDate() + 1);
-  return returnQueryDateString(today);
+const constructQueryDate = (date, isTomorrow) => {
+  const workingDate = new Date(date);
+  if (isTomorrow) {
+    workingDate.setDate(workingDate.getDate() + 1);
+  }
+  return returnQueryDateString(workingDate);
 };
 
 const returnQueryDateString = date => {
@@ -34,4 +31,4 @@ const localizeTime = time => {
   return localizedTime;
 };
 
-export { getCurrentDate, constructStart, constructEnd, localizeTime };
+export { getCurrentDate, constructQueryDate, localizeTime };

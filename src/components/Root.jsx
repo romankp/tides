@@ -1,15 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { baseUrl, stationId } from '../utils/constants.js';
-import {
-  getCurrentDate,
-  constructStart,
-  constructEnd
-} from '../utils/parsers.js';
+import { getCurrentDate, constructQueryDate } from '../utils/parsers.js';
 import Today from './Today';
 
 const currentTime = Date.now();
-const startDate = constructStart(currentTime);
-const endDate = constructEnd(currentTime);
+const startDate = constructQueryDate(currentTime, false);
+const endDate = constructQueryDate(currentTime, true);
 const urlFull = `${baseUrl}?station=${stationId}${`&datum=STND&time_zone=lst&begin_date=${startDate}&end_date=${endDate}&units=english&format=json&product=predictions&interval=hilo`}`;
 
 const fetchTideData = async url => {

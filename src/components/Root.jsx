@@ -5,15 +5,15 @@ import {
   paramsToday,
   paramsFull
 } from '../utils/constants.js';
-import { getCurrentDate, localizeTime } from '../utils/parsers.js';
+import { getCurrentDate, constructStart } from '../utils/parsers.js';
 import Today from './Today';
 
-const startDate = 20201228;
+const currentTime = Date.now();
+const startDate = constructStart(currentTime);
 const endDate = 20201229;
 // TODO: use specific dates instead of "today" parameter as EST/EDT is several hours behind
 const urlFull = `${baseUrl}?station=${stationId}${`&datum=STND&time_zone=lst&begin_date=${startDate}&end_date=${endDate}&units=english&format=json&product=predictions&interval=hilo`}`;
 // const urlToday = `${baseUrl}?station=${stationId}${paramsToday}`;
-const currentTime = Date.now();
 
 // console.log(urlFull);
 
@@ -24,6 +24,10 @@ const fetchTideData = async url => {
   const data = await response.json();
   return data;
 };
+
+// constructStart();
+
+// console.log(constructStart());
 
 class Root extends Component {
   constructor(props) {

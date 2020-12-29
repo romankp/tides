@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { baseUrl, stationId } from '../utils/constants.js';
-import { getCurrentDate, constructQueryDate } from '../utils/parsers.js';
+import { getCurrentDate, constructQueryDate } from '../utils/componentUtils.js';
 import Today from './Today';
 
 const currentTime = Date.now();

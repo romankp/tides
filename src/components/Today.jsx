@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { localizeTime } from '../utils/parsers.js';
+import { localizeTime } from '../utils/componentUtils.js';
 
 const hilo = {
   H: 'high',

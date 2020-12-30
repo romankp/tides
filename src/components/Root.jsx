@@ -79,7 +79,7 @@ class Root extends Component {
         });
       }, 500);
       const nextPrediction =
-        this.state.predictionsArray.find(({ t }) => {
+        predictions.find(({ t }) => {
           const predictionDate = new Date(t);
           if (currentTime < predictionDate) {
             return true;

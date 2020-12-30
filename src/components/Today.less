@@ -42,4 +42,15 @@ li {
   background: linear-gradient(-10deg, @base-blue, @base-violet);
   border-radius: 4px;
   color: white;
+  position: relative;
+  &::after {
+    content: 'next event';
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding-right: 8px;
+    opacity: 0.4;
+    text-transform: uppercase;
+  }
 }

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { baseUrl, stationId } from '../utils/constants.js';
-import { getCurrentDate, constructQueryDate } from '../utils/componentUtils.js';
+import {
+  getCurrentDateString,
+  constructQueryDate
+} from '../utils/componentUtils.js';
 import Today from './Today';
 
 const returnTodaysCutoff = date => {
@@ -28,18 +31,20 @@ const fetchTideData = async url => {
 // If it's after the tidal cutoff time,
 // return an array of prediction items for todays date
 // AND the first item for tomorrow's date.
-const truncatePredictions = (predictions, nextTime) => {
+const truncatePredictions = (current, predictions, nextTime) => {
   if (isAfterCutoff && predictions.length) {
-    const todayDate = new Date(predictions[0].t).getDate();
+    const currentDay = current.getDate();
+    // Truncate predictions to today's date
     const truncatedArray = predictions.filter(({ t }) => {
-      const itemDate = new Date(t).getDate();
-      return todayDate === itemDate;
+      const itemDay = new Date(t).getDate();
+      return currentDay === itemDay;
     });
-    // Attach first event from tomorrow
+    // Tomorrow's first todal event
     const tomorrowItem = predictions.find(({ t }) => {
-      const itemDate = new Date(t).getDate();
-      return todayDate !== itemDate;
+      const itemDay = new Date(t).getDate();
+      return currentDay !== itemDay;
     });
+    // If next event is tommorrow, attach tomorrow's first tidal event to predictions
     if (nextIsTomorrow(tomorrowItem.t, nextTime)) {
       truncatedArray.push(tomorrowItem);
     }
@@ -56,11 +61,23 @@ const nextIsTomorrow = (tomorrowTime, nextTime) => {
   tomorrowDay === nextEventDay ? true : false;
 };
 
+const returnNextEvent = predictions => {
+  return (
+    predictions.find(({ t }) => {
+      const predictionDate = new Date(t);
+      if (currentTime < predictionDate) {
+        return true;
+      }
+      return false;
+    }) || {}
+  );
+};
+
 class Root extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentDate: getCurrentDate(),
+      currentDateString: getCurrentDateString(currentTime),
       loaded: false,
       predictionsArray: [],
       nextEvent: {}
@@ -68,37 +85,37 @@ class Root extends Component {
   }
 
   componentDidMount() {
-    fetchTideData(urlFull).then(data => {
-      const { predictions } = data;
+    fetchTideData(urlFull).then(({ predictions }) => {
       this.setState({
-        predictionsArray: predictions
+        predictionsArray: predictions,
+        nextEvent: returnNextEvent(predictions)
       });
       setTimeout(() => {
         this.setState({
           loaded: true
         });
       }, 500);
-      const nextPrediction =
-        predictions.find(({ t }) => {
-          const predictionDate = new Date(t);
-          if (currentTime < predictionDate) {
-            return true;
-          }
-          return false;
-        }) || {};
-      this.setState({ nextEvent: nextPrediction });
     });
   }
 
   render() {
-    let { loaded, currentDate, predictionsArray, nextEvent } = this.state;
+    const {
+      loaded,
+      currentDateString,
+      predictionsArray,
+      nextEvent
+    } = this.state;
     const nextTime = nextEvent.t;
     return (
       <div className={`main${loaded ? ' show' : ''}`}>
         <h1>Tides</h1>
         <Today
-          predictions={truncatePredictions(predictionsArray, nextTime)}
-          date={currentDate}
+          predictions={truncatePredictions(
+            currentTime,
+            predictionsArray,
+            nextTime
+          )}
+          date={currentDateString}
           nextEvent={nextEvent}
         />
       </div>

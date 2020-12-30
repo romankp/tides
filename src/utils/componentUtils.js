@@ -1,5 +1,5 @@
-const getCurrentDate = () => {
-  return new Date().toLocaleDateString('en-US', {
+const getCurrentDateString = date => {
+  return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -31,4 +31,4 @@ const localizeTime = time => {
   return localizedTime;
 };
 
-export { getCurrentDate, constructQueryDate, localizeTime };
+export { getCurrentDateString, constructQueryDate, localizeTime };

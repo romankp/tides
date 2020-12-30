@@ -18,7 +18,6 @@ const Today = ({ predictions, date, nextEvent }) => {
   return (
     <Fragment>
       <h2>Today / {date}</h2>
-      {/* TODO create solution for nextEvent when next day */}
       <ol>
         {predictions.map(({ type, t }) => {
           const isNext = checkNext(type, t, nextEvent);

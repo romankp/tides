@@ -28,7 +28,7 @@ const fetchTideData = async url => {
 // If it's after the tidal cutoff time,
 // return an array of prediction items for todays date
 // AND the first item for tomorrow's date.
-const truncatePredictions = predictions => {
+const truncatePredictions = (predictions, nextTime) => {
   if (isAfterCutoff && predictions.length) {
     const todayDate = new Date(predictions[0].t).getDate();
     const truncatedArray = predictions.filter(({ t }) => {
@@ -40,10 +40,20 @@ const truncatePredictions = predictions => {
       const itemDate = new Date(t).getDate();
       return todayDate !== itemDate;
     });
-    truncatedArray.push(tomorrowItem);
+    if (nextIsTomorrow(tomorrowItem.t, nextTime)) {
+      truncatedArray.push(tomorrowItem);
+    }
     return truncatedArray;
   }
   return predictions;
+};
+
+// Check that the next event is tomorrow
+const nextIsTomorrow = (tomorrowTime, nextTime) => {
+  const tomorrowDay = new Date(tomorrowTime).getDate();
+  // Default to 0 since getDate never returns it, while nextTime is not ready
+  const nextEventDay = nextTime ? new Date(nextTime).getDate() : 0;
+  tomorrowDay === nextEventDay ? true : false;
 };
 
 class Root extends Component {
@@ -82,11 +92,12 @@ class Root extends Component {
 
   render() {
     let { loaded, currentDate, predictionsArray, nextEvent } = this.state;
+    const nextTime = nextEvent.t;
     return (
       <div className={`main${loaded ? ' show' : ''}`}>
         <h1>Tides</h1>
         <Today
-          predictions={truncatePredictions(predictionsArray)}
+          predictions={truncatePredictions(predictionsArray, nextTime)}
           date={currentDate}
           nextEvent={nextEvent}
         />

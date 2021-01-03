@@ -58,7 +58,7 @@ const nextIsTomorrow = (tomorrowTime, nextTime) => {
   const tomorrowDay = new Date(tomorrowTime).getDate();
   // Default to 0 since getDate never returns it, while nextTime is not ready
   const nextEventDay = nextTime ? new Date(nextTime).getDate() : 0;
-  tomorrowDay === nextEventDay ? true : false;
+  return tomorrowDay === nextEventDay;
 };
 
 const returnNextEvent = predictions => {

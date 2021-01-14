@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { baseUrl, stationId } from '../utils/constants.js';
 import {
   getCurrentDateString,
   constructQueryDate
 } from '../utils/componentUtils.js';
 import Today from './Today';
+import DatePicker from './DatePicker';
 
 const returnTodaysCutoff = date => {
   const workingDate = new Date(date);
@@ -107,18 +108,21 @@ class Root extends Component {
     } = this.state;
     const nextTime = nextEvent.t;
     return (
-      <div className={`main${loaded ? ' show' : ''}`}>
-        <h1>Tides</h1>
-        <Today
-          predictions={truncatePredictions(
-            currentTime,
-            predictionsArray,
-            nextTime
-          )}
-          date={currentDateString}
-          nextEvent={nextEvent}
-        />
-      </div>
+      <Fragment>
+        <div className={`main${loaded ? ' show' : ''}`}>
+          <h1>Tides</h1>
+          <Today
+            predictions={truncatePredictions(
+              currentTime,
+              predictionsArray,
+              nextTime
+            )}
+            date={currentDateString}
+            nextEvent={nextEvent}
+          />
+        </div>
+        <DatePicker/>
+      </Fragment>
     );
   }
 }

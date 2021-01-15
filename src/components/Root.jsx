@@ -108,8 +108,8 @@ class Root extends Component {
     } = this.state;
     const nextTime = nextEvent.t;
     return (
-      <Fragment>
-        <div className={`main${loaded ? ' show' : ''}`}>
+      <div className={`wrapper${loaded ? ' show' : ''}`}>
+        <div className="main">
           <h1>Tides</h1>
           <Today
             predictions={truncatePredictions(
@@ -121,8 +121,8 @@ class Root extends Component {
             nextEvent={nextEvent}
           />
         </div>
-        <DatePicker/>
-      </Fragment>
+        <DatePicker />
+      </div>
     );
   }
 }

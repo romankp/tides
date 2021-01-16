@@ -1,14 +1,23 @@
 import React from 'react';
 
 // Tide prediction is limited to 10 years from current date
+const months = ['January', 'February'];
+
+// const formatNumberString = numeral => {};
+
+const Option = (value, string) => (
+  <option key={string} value={value}>
+    {string}
+  </option>
+);
 
 const DatePicker = () => {
   return (
     <form className="datePicker">
-      <label for="month">Choose date:</label>
       <select name="month" id="month" className="dropdownItem">
-        <option value="01">January</option>
-        <option value="02">February</option>
+        {months.map((month, i) => {
+          return Option(i + 1, month);
+        })}
       </select>
       <select name="day" id="day" className="dropdownItem">
         <option value="01">01</option>

@@ -21,6 +21,10 @@ const startDate = constructQueryDate(currentTime, false);
 const endDate = constructQueryDate(currentTime, isAfterCutoff);
 const urlFull = `${baseUrl}?station=${stationId}${`&datum=STND&time_zone=lst&begin_date=${startDate}&end_date=${endDate}&units=english&format=json&product=predictions&interval=hilo`}`;
 
+
+console.log(process.env.BASE_URL);
+console.log(process.env.STATION_ID);
+
 const fetchTideData = async url => {
   const response = await fetch(url).catch(e => {
     console.error(`Fetch request failed: ${e}`);

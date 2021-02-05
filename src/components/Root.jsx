@@ -1,11 +1,13 @@
 import React, { Component, Fragment } from 'react';
-import { baseUrl, stationId } from '../utils/constants.js';
 import {
   getCurrentDateString,
   constructQueryDate
 } from '../utils/componentUtils.js';
 import Today from './Today';
 import DatePicker from './DatePicker';
+
+const baseUrl = process.env.BASE_URL;
+const stationId = process.env.STATION_ID;
 
 const returnTodaysCutoff = date => {
   const workingDate = new Date(date);
@@ -20,10 +22,6 @@ const startDate = constructQueryDate(currentTime, false);
 // Request tomorrow's date string only if it's past the tidal cutoff time
 const endDate = constructQueryDate(currentTime, isAfterCutoff);
 const urlFull = `${baseUrl}?station=${stationId}${`&datum=STND&time_zone=lst&begin_date=${startDate}&end_date=${endDate}&units=english&format=json&product=predictions&interval=hilo`}`;
-
-
-console.log(process.env.BASE_URL);
-console.log(process.env.STATION_ID);
 
 const fetchTideData = async url => {
   const response = await fetch(url).catch(e => {

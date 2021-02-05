@@ -1,7 +1,7 @@
 {
   "name": "tides",
   "version": "2.0.0",
-  "description": "New versoion of tides",
+  "description": "New version of tides",
   "main": "index.js",
   "scripts": {
     "start": "parcel src/index.html",

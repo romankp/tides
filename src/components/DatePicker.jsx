@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { months } from '../utils/constants.js';
 
 // Tide prediction is limited to 10 years from current date
@@ -9,7 +10,8 @@ const Option = (value, string) => (
   </option>
 );
 
-const DatePicker = () => {
+const DatePicker = ({ date }) => {
+  console.log(date);
   return (
     <form className="datePicker">
       <select name="month" id="month" className="dropdownItem">
@@ -27,6 +29,10 @@ const DatePicker = () => {
       </select>
     </form>
   );
+};
+
+DatePicker.propTypes = {
+  date: PropTypes.string,
 };
 
 export default DatePicker;

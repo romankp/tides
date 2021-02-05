@@ -6,22 +6,23 @@ import {
 import Today from './Today';
 import DatePicker from './DatePicker';
 
+// We don't destructure here because of a limitation in how Parcel interacts with .env variables
 const baseUrl = process.env.BASE_URL;
 const stationId = process.env.STATION_ID;
 
-const returnTodaysCutoff = date => {
-  const workingDate = new Date(date);
+const returnTodaysCutoff = () => {
+  const workingDate = new Date();
   workingDate.setHours(18, 47, 30);
   return workingDate;
 };
 
 const currentTime = new Date();
-const tidalCutoff = returnTodaysCutoff(currentTime);
+const tidalCutoff = returnTodaysCutoff();
 const isAfterCutoff = currentTime >= tidalCutoff ? true : false;
 const startDate = constructQueryDate(currentTime, false);
 // Request tomorrow's date string only if it's past the tidal cutoff time
 const endDate = constructQueryDate(currentTime, isAfterCutoff);
-const urlFull = `${baseUrl}?station=${stationId}${`&datum=STND&time_zone=lst&begin_date=${startDate}&end_date=${endDate}&units=english&format=json&product=predictions&interval=hilo`}`;
+const urlFull = `${baseUrl}?station=${stationId}&datum=STND&time_zone=lst&begin_date=${startDate}&end_date=${endDate}&units=english&format=json&product=predictions&interval=hilo`;
 
 const fetchTideData = async url => {
   const response = await fetch(url).catch(e => {

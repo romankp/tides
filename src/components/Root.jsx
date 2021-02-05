@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import {
   getCurrentDateString,
-  constructQueryDate
+  constructQueryDate,
 } from '../utils/componentUtils.js';
 import Today from './Today';
 import DatePicker from './DatePicker';
@@ -83,7 +83,7 @@ class Root extends Component {
       currentDateString: getCurrentDateString(currentTime),
       loaded: false,
       predictionsArray: [],
-      nextEvent: {}
+      nextEvent: {},
     };
   }
 
@@ -91,11 +91,11 @@ class Root extends Component {
     fetchTideData(urlFull).then(({ predictions }) => {
       this.setState({
         predictionsArray: predictions,
-        nextEvent: returnNextEvent(predictions)
+        nextEvent: returnNextEvent(predictions),
       });
       setTimeout(() => {
         this.setState({
-          loaded: true
+          loaded: true,
         });
       }, 500);
     });
@@ -106,7 +106,7 @@ class Root extends Component {
       loaded,
       currentDateString,
       predictionsArray,
-      nextEvent
+      nextEvent,
     } = this.state;
     const nextTime = nextEvent.t;
     return (

@@ -1,9 +1,7 @@
 import React from 'react';
+import { months } from '../utils/constants.js';
 
 // Tide prediction is limited to 10 years from current date
-const months = ['January', 'February'];
-
-// const formatNumberString = numeral => {};
 
 const Option = (value, string) => (
   <option key={string} value={value}>

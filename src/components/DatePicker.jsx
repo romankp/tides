@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Calendar from 'react-calendar';
 import { months } from '../utils/constants.js';
 
 // Tide prediction is limited to 10 years from current date
@@ -14,7 +15,7 @@ const DatePicker = ({ date }) => {
   console.log(date);
   return (
     <form className="datePicker">
-      <select name="month" id="month" className="dropdownItem">
+      {/* <select name="month" id="month" className="dropdownItem">
         {months.map((month, i) => {
           return Option(i + 1, month);
         })}
@@ -26,13 +27,14 @@ const DatePicker = ({ date }) => {
       <select name="year" id="year" className="dropdownItem">
         <option value="01">2021</option>
         <option value="02">2022</option>
-      </select>
+      </select> */}
+      <Calendar />
     </form>
   );
 };
 
 DatePicker.propTypes = {
-  date: PropTypes.string,
+  date: PropTypes.object,
 };
 
 export default DatePicker;

@@ -124,7 +124,7 @@ class Root extends Component {
             nextEvent={nextEvent}
           />
         </div>
-        <DatePicker date={currentDateString} />
+        <DatePicker date={currentTime} />
       </div>
     );
   }

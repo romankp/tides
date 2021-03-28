@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   getCurrentDateString,
   constructQueryDate,
+  buildFullURL,
 } from '../utils/componentUtils.js';
 import Today from './Today';
 import DatePicker from './DatePicker';
@@ -10,19 +11,12 @@ import DatePicker from './DatePicker';
 const baseUrl = process.env.BASE_URL;
 const stationId = process.env.STATION_ID;
 
-const returnTodaysCutoff = () => {
-  const workingDate = new Date();
-  workingDate.setHours(18, 47, 30);
-  return workingDate;
-};
-
 const currentTime = new Date();
-const tidalCutoff = returnTodaysCutoff();
-const isAfterCutoff = currentTime >= tidalCutoff ? true : false;
+const tidalCutoff = currentTime.setHours(18, 47, 30);
+const isAfterCutoff = currentTime >= tidalCutoff;
 const startDate = constructQueryDate(currentTime, false);
-// Request tomorrow's date string only if it's past the tidal cutoff time
 const endDate = constructQueryDate(currentTime, isAfterCutoff);
-const urlFull = `${baseUrl}?station=${stationId}&datum=STND&time_zone=lst&begin_date=${startDate}&end_date=${endDate}&units=english&format=json&product=predictions&interval=hilo`;
+const urlFull = buildFullURL(baseUrl, stationId, startDate, endDate);
 
 const fetchTideData = async url => {
   try {
@@ -58,7 +52,8 @@ const truncatePredictions = (current, predictions, nextTime) => {
   return predictions;
 };
 
-// Check that the next event is tomorrow
+// Check that the next event is tomorrow,
+// in case current date/time is past today's event times
 const nextIsTomorrow = (tomorrowTime, nextTime) => {
   const tomorrowDay = new Date(tomorrowTime).getDate();
   // Default to 0 since getDate never returns it, while nextTime is not ready
@@ -96,12 +91,6 @@ class Root extends Component {
         nextEvent: returnNextEvent(predictions),
         loaded: true,
       });
-      // Just using this for testing
-      // setTimeout(() => {
-      //   this.setState({
-      //     loaded: true,
-      //   });
-      // }, 500);
     });
   }
 

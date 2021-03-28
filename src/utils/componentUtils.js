@@ -1,9 +1,13 @@
+const buildFullURL = (baseUrl, stationId, startDate, endDate) => {
+  return `${baseUrl}?station=${stationId}&datum=STND&time_zone=lst&begin_date=${startDate}&end_date=${endDate}&units=english&format=json&product=predictions&interval=hilo`;
+};
+
 const getCurrentDateString = date => {
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
-    timeZone: 'est'
+    timeZone: 'est',
   });
 };
 
@@ -19,16 +23,18 @@ const returnQueryDateString = date => {
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDate();
-  return `${year}${month < 10 ? `0${month}`: month}${day < 10 ? `0${day}` : day}`;
+  return `${year}${month < 10 ? `0${month}` : month}${
+    day < 10 ? `0${day}` : day
+  }`;
 };
 
 const localizeTime = time => {
   const timeString = new Date(time);
   const localizedTime = timeString.toLocaleTimeString('en-US', {
     hour: '2-digit',
-    minute: '2-digit'
+    minute: '2-digit',
   });
   return localizedTime;
 };
 
-export { getCurrentDateString, constructQueryDate, localizeTime };
+export { buildFullURL, getCurrentDateString, constructQueryDate, localizeTime };

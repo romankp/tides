@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import {
   getCurrentDateString,
   constructQueryDate,
@@ -25,11 +25,12 @@ const endDate = constructQueryDate(currentTime, isAfterCutoff);
 const urlFull = `${baseUrl}?station=${stationId}&datum=STND&time_zone=lst&begin_date=${startDate}&end_date=${endDate}&units=english&format=json&product=predictions&interval=hilo`;
 
 const fetchTideData = async url => {
-  const response = await fetch(url).catch(e => {
-    console.error(`Fetch request failed: ${e}`);
-  });
-  const data = await response.json();
-  return data;
+  try {
+    const response = await fetch(url);
+    return await response.json();
+  } catch (e) {
+    console.error(`Fetch request for tide data failed: ${e}`);
+  }
 };
 
 // If it's after the tidal cutoff time,
@@ -93,12 +94,14 @@ class Root extends Component {
       this.setState({
         predictionsArray: predictions,
         nextEvent: returnNextEvent(predictions),
+        loaded: true,
       });
-      setTimeout(() => {
-        this.setState({
-          loaded: true,
-        });
-      }, 500);
+      // Just using this for testing
+      // setTimeout(() => {
+      //   this.setState({
+      //     loaded: true,
+      //   });
+      // }, 500);
     });
   }
 

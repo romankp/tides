@@ -25,6 +25,7 @@
     "@babel/core": "7.13",
     "@babel/preset-env": "7.13",
     "@babel/preset-react": "7.13",
+    "@parcel/transformer-less": "^2.0.0-beta.2",
     "less": "4",
     "parcel": "2.0.0-beta.2"
   },

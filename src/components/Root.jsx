@@ -38,7 +38,7 @@ const truncatePredictions = (current, predictions, nextTime) => {
       const itemDay = new Date(t).getDate();
       return currentDay === itemDay;
     });
-    // Tomorrow's first todal event
+    // Tomorrow's first tidal event
     const tomorrowItem = predictions.find(({ t }) => {
       const itemDay = new Date(t).getDate();
       return currentDay !== itemDay;

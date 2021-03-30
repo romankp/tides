@@ -8,7 +8,20 @@
   justify-content: space-between;
   .react-calendar {
     font-family: 'Source Sans Pro', sans-serif;
-    color: magenta;
+    color: @dark-violet;
     border: none;
+    button {
+      font-family: 'Source Sans Pro', sans-serif;
+      color: @dark-violet;
+    }
+    .react-calendar__navigation__label__labelText {
+      font-size: 24px;
+    }
+    .react-calendar__month-view__weekdays__weekday {
+      abbr {
+        font-weight: 700;
+        text-decoration: none;
+      }
+    }
   }
 }

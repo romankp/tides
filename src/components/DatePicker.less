@@ -7,12 +7,19 @@
   display: flex;
   justify-content: space-between;
   .react-calendar {
-    font-family: 'Source Sans Pro', sans-serif;
-    color: @dark-violet;
     border: none;
-    button {
+    * {
       font-family: 'Source Sans Pro', sans-serif;
       color: @dark-violet;
+      border-radius: 4px;
+    }
+    .react-calendar__navigation {
+      margin: 0 0 8px;
+      height: 32px;
+      button {
+        font-size: 24px;
+        color: #9a90af;
+      }
     }
     .react-calendar__navigation__label__labelText {
       font-size: 24px;
@@ -21,6 +28,21 @@
       abbr {
         font-weight: 700;
         text-decoration: none;
+      }
+    }
+    .react-calendar__tile {
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+    .react-calendar__tile--now {
+      background: linear-gradient(-10deg, #2745f2, #520de7);
+      border-radius: 4px;
+      * {
+        color: white;
+      }
+      &:enabled:hover,
+      &:enabled:focus {
+        background-color: #7086ff;
       }
     }
   }

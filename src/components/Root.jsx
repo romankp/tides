@@ -76,12 +76,17 @@ const returnNextEvent = predictions => {
 class Root extends Component {
   constructor(props) {
     super(props);
+    this.handleDateChange = this.handleDateChange.bind(this);
     this.state = {
       currentDateString: getCurrentDateString(currentTime),
       loaded: false,
       predictionsArray: [],
       nextEvent: {},
     };
+  }
+
+  handleDateChange(pickedDate) {
+    this.setState({ currentDateString: getCurrentDateString(pickedDate) });
   }
 
   componentDidMount() {
@@ -116,7 +121,7 @@ class Root extends Component {
             nextEvent={nextEvent}
           />
         </div>
-        <DatePicker date={currentTime} />
+        <DatePicker date={currentTime} onDateChange={this.handleDateChange} />
       </div>
     );
   }

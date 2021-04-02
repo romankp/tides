@@ -4,7 +4,7 @@ import { localizeTime } from '../utils/componentUtils.js';
 
 const hilo = {
   H: 'high',
-  L: 'low'
+  L: 'low',
 };
 
 const checkNext = (thisType, thisTime, nextEvent) => {
@@ -15,6 +15,7 @@ const checkNext = (thisType, thisTime, nextEvent) => {
 };
 
 const Today = ({ predictions, date, nextEvent }) => {
+  // console.log(date);
   return (
     <Fragment>
       <h2>Today / {date}</h2>
@@ -35,7 +36,7 @@ const Today = ({ predictions, date, nextEvent }) => {
 Today.propTypes = {
   predictions: PropTypes.array,
   date: PropTypes.string,
-  nextEvent: PropTypes.object
+  nextEvent: PropTypes.object,
 };
 
 export default Today;

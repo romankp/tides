@@ -4,6 +4,14 @@ const buildFullURL = (baseUrl, stationId, startDate, endDate) => {
 
 const getCurrentDateString = date => {
   console.log(`getCurrentDateString -> ${date}`);
+  console.log(
+    `getCurrentDateString toLocale -> ${date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      timeZone: 'est',
+    })}`
+  );
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',

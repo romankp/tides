@@ -14,6 +14,10 @@ const DatePicker = ({ date, onDateChange }) => {
         calendarType="US"
         onChange={updatedDate => {
           console.log(updatedDate);
+          // const adjustedDate = updatedDate.setSeconds(
+          //   updatedDate.getSeconds() + 10
+          // );
+          // console.log(updatedDate.setSeconds(10));
           onDateChange(updatedDate);
         }}
         value={date}

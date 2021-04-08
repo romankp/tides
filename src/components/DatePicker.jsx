@@ -7,7 +7,6 @@ import { months } from '../utils/constants.js';
 // Tide prediction is limited to 10 years from current date
 
 const DatePicker = ({ date, onDateChange }) => {
-  console.log;
   return (
     <div className="datePicker">
       <Calendar

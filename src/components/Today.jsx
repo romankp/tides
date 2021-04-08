@@ -15,7 +15,6 @@ const checkNext = (thisType, thisTime, nextEvent) => {
 };
 
 const Today = ({ predictions, date, nextEvent }) => {
-  // console.log(date);
   return (
     <Fragment>
       <h2>Today / {date}</h2>

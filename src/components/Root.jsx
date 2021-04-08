@@ -86,6 +86,11 @@ class Root extends Component {
   }
 
   handleDateChange(pickedDate) {
+    console.log(
+      `this is the getCurrentDateString output after date change is handled -> ${getCurrentDateString(
+        pickedDate
+      )}`
+    );
     this.setState({ currentDateString: getCurrentDateString(pickedDate) });
   }
 

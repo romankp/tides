@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -12,12 +12,11 @@ const DatePicker = ({ date, onDateChange }) => {
       <Calendar
         calendarType="US"
         onChange={updatedDate => {
-          console.log(updatedDate);
-          // const adjustedDate = updatedDate.setSeconds(
-          //   updatedDate.getSeconds() + 10
-          // );
-          // console.log(updatedDate.setSeconds(10));
-          onDateChange(updatedDate);
+          // This is a temporary solution to accommodate DST in my area.
+          // We don't really need to know the time of day right now.
+          // TODO: Dynamic check for offset
+          const adjustedDate = new Date(updatedDate.setHours(2));
+          onDateChange(adjustedDate);
         }}
         value={date}
       />

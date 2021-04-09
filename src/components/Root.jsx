@@ -80,24 +80,29 @@ class Root extends Component {
     this.state = {
       currentDateString: getCurrentDateString(currentTime),
       loaded: false,
-      predictionsArray: [],
+      predictionsToday: [],
       nextEvent: {},
+      pickedDate: '',
+      predictionsFuture: [],
     };
   }
 
   handleDateChange(pickedDate) {
     console.log(
+      `this is the raw output after date change is handled -> ${pickedDate}`
+    );
+    console.log(
       `this is the getCurrentDateString output after date change is handled -> ${getCurrentDateString(
         pickedDate
       )}`
     );
-    this.setState({ currentDateString: getCurrentDateString(pickedDate) });
+    this.setState({ pickedDate: getCurrentDateString(pickedDate) });
   }
 
   componentDidMount() {
     fetchTideData(urlFull).then(({ predictions }) => {
       this.setState({
-        predictionsArray: predictions,
+        predictionsToday: predictions,
         nextEvent: returnNextEvent(predictions),
         loaded: true,
       });
@@ -108,7 +113,7 @@ class Root extends Component {
     const {
       loaded,
       currentDateString,
-      predictionsArray,
+      predictionsToday,
       nextEvent,
     } = this.state;
     const nextTime = nextEvent.t;
@@ -119,7 +124,7 @@ class Root extends Component {
           <Today
             predictions={truncatePredictions(
               currentTime,
-              predictionsArray,
+              predictionsToday,
               nextTime
             )}
             date={currentDateString}

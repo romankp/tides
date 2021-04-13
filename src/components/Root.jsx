@@ -83,23 +83,9 @@ class Root extends Component {
       predictionsToday: [],
       nextEvent: {},
       pickedDate: '',
+      futureLoaded: false,
       predictionsFuture: [],
     };
-  }
-
-  handleDateChange(pickedDate) {
-    console.log(
-      `this is the raw output after date change is handled -> ${pickedDate}`
-    );
-    console.log(
-      `this is the getCurrentDateString output after date change is handled -> ${getCurrentDateString(
-        pickedDate
-      )}`
-    );
-    const queryDate = constructQueryDate(pickedDate, false);
-    const updatedURL = buildFullURL(baseUrl, stationId, queryDate, queryDate);
-    console.log(`updated URL -> ${updatedURL}`);
-    this.setState({ pickedDate: getCurrentDateString(pickedDate) });
   }
 
   componentDidMount() {
@@ -109,6 +95,33 @@ class Root extends Component {
         nextEvent: returnNextEvent(predictions),
         loaded: true,
       });
+    });
+  }
+
+  handleDateChange(pickedDate) {
+    console.log(
+      `this is the getCurrentDateString output after date change is handled -> ${getCurrentDateString(
+        pickedDate
+      )}`
+    );
+    const queryDate = constructQueryDate(pickedDate, false);
+    const updatedURL = buildFullURL(baseUrl, stationId, queryDate, queryDate);
+
+    fetchTideData(updatedURL).then(({ predictions }) => {
+      this.setState({
+        predictionsFuture: predictions,
+        pickedDate: getCurrentDateString(pickedDate),
+        futureLoaded: true,
+      });
+      console.log(
+        `predictionsFuture state -> ${JSON.stringify(
+          this.state.predictionsFuture,
+          null,
+          2
+        )}`
+      );
+      console.log(`pickedDate state -> ${this.state.pickedDate}`);
+      console.log(`futureLoaded state -> ${this.state.futureLoaded}`);
     });
   }
 

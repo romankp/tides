@@ -96,9 +96,12 @@ class Root extends Component {
         pickedDate
       )}`
     );
-    console.log(
-      `constructed query date -> ${constructQueryDate(pickedDate, false)}`
-    );
+    // console.log(
+    //   `constructed query date -> ${constructQueryDate(pickedDate, false)}`
+    // );
+    const queryDate = constructQueryDate(pickedDate, false);
+    const updatedURL = buildFullURL(baseUrl, stationId, queryDate, queryDate);
+    console.log(`updated URL -> ${updatedURL}`);
     this.setState({ pickedDate: getCurrentDateString(pickedDate) });
   }
 

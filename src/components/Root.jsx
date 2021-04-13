@@ -96,6 +96,9 @@ class Root extends Component {
         pickedDate
       )}`
     );
+    console.log(
+      `constructed query date -> ${constructQueryDate(pickedDate, false)}`
+    );
     this.setState({ pickedDate: getCurrentDateString(pickedDate) });
   }
 

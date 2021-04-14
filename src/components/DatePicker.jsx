@@ -14,9 +14,9 @@ const DatePicker = ({
   date,
   onDateChange,
   futureLoaded,
+  formattedDate,
   predictionsFuture,
 }) => {
-  let pickedDate = '';
   return (
     <div className="datePicker">
       <Calendar
@@ -26,14 +26,13 @@ const DatePicker = ({
           // We don't really need to know the time of day right now.
           // TODO: Dynamic check for offset
           const adjustedDate = new Date(updatedDate.setHours(2));
-          pickedDate = adjustedDate;
           onDateChange(adjustedDate);
         }}
         value={date}
       />
       {futureLoaded && (
         <Fragment>
-          <h2>{pickedDate}</h2>
+          <h2>{formattedDate}</h2>
           <ol>
             {predictionsFuture.map(({ type, t }) => {
               return (
@@ -53,6 +52,7 @@ DatePicker.propTypes = {
   date: PropTypes.object,
   onDateChange: PropTypes.func,
   futureLoaded: PropTypes.bool,
+  ormattedDate: PropTypes.string,
   predictionsFuture: PropTypes.array,
 };
 

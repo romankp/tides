@@ -132,6 +132,7 @@ class Root extends Component {
       predictionsToday,
       nextEvent,
       futureLoaded,
+      pickedDate,
       predictionsFuture,
     } = this.state;
     const nextTime = nextEvent.t;
@@ -153,6 +154,7 @@ class Root extends Component {
           date={currentTime}
           onDateChange={this.handleDateChange}
           futureLoaded={futureLoaded}
+          formattedDate={pickedDate}
           predictionsFuture={predictionsFuture}
         />
         {/* {futureLoaded && (

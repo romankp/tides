@@ -131,6 +131,8 @@ class Root extends Component {
       currentDateString,
       predictionsToday,
       nextEvent,
+      futureLoaded,
+      predictionsFuture,
     } = this.state;
     const nextTime = nextEvent.t;
     return (
@@ -147,7 +149,23 @@ class Root extends Component {
             nextEvent={nextEvent}
           />
         </div>
-        <DatePicker date={currentTime} onDateChange={this.handleDateChange} />
+        <DatePicker
+          date={currentTime}
+          onDateChange={this.handleDateChange}
+          futureLoaded={futureLoaded}
+          predictionsFuture={predictionsFuture}
+        />
+        {/* {futureLoaded && (
+          <Today
+            predictions={truncatePredictions(
+              currentTime,
+              predictionsToday,
+              nextTime
+            )}
+            date={currentDateString}
+            nextEvent={nextEvent}
+          />
+        )} */}
       </div>
     );
   }

@@ -10,13 +10,13 @@ const hilo = {
   L: 'low',
 };
 
-const FuturePredictions = (
+const FuturePredictions = ({
   futureLoaded,
   formattedDate,
   predictionsFuture,
-  hilo
-) => (
-  <div className={!futureLoaded ? 'hide' : null}>
+  hilo,
+}) => (
+  <div className={`futureLoaded${!futureLoaded ? ' hide' : ''}`}>
     <h2>{formattedDate}</h2>
     <ol>
       {predictionsFuture.map(({ type, t }) => {
@@ -27,7 +27,9 @@ const FuturePredictions = (
         );
       })}
     </ol>
-    <span className={'back'}>&#8617;</span>
+    <button className={'back'} type="button">
+      &#8617;
+    </button>
   </div>
 );
 
@@ -37,28 +39,28 @@ const DatePicker = ({
   futureLoaded,
   formattedDate,
   predictionsFuture,
-}) => {
-  return (
-    <div className="datePicker">
-      {futureLoaded ? (
-        FuturePredictions(futureLoaded, formattedDate, predictionsFuture, hilo)
-      ) : (
-        <Calendar
-          calendarType="US"
-          onChange={updatedDate => {
-            // This is a temporary solution to accommodate DST in my area.
-            // We don't really need to know the time of day right now.
-            // TODO: Dynamic check for offset
-            const adjustedDate = new Date(updatedDate.setHours(2));
-            onDateChange(adjustedDate);
-          }}
-          value={date}
-          className={futureLoaded ? 'hide' : null}
-        />
-      )}
-    </div>
-  );
-};
+}) => (
+  <div className="datePicker">
+    {futureLoaded ? (
+      <FuturePredictions
+        {...{ futureLoaded, formattedDate, predictionsFuture, hilo }}
+      />
+    ) : (
+      <Calendar
+        calendarType="US"
+        onChange={updatedDate => {
+          // This is a temporary solution to accommodate DST in my area.
+          // We don't really need to know the time of day right now.
+          // TODO: Dynamic check for offset
+          const adjustedDate = new Date(updatedDate.setHours(2));
+          onDateChange(adjustedDate);
+        }}
+        value={date}
+        className={futureLoaded ? 'hide' : null}
+      />
+    )}
+  </div>
+);
 
 DatePicker.propTypes = {
   date: PropTypes.object,

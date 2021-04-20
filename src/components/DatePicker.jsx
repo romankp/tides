@@ -15,6 +15,7 @@ const FuturePredictions = ({
   formattedDate,
   predictionsFuture,
   hilo,
+  onBackClick,
 }) => (
   <div className={`futureLoaded${!futureLoaded ? ' hide' : ''}`}>
     <h2>{formattedDate}</h2>
@@ -27,7 +28,7 @@ const FuturePredictions = ({
         );
       })}
     </ol>
-    <button className={'back'} type="button">
+    <button className={'back'} type="button" onClick={onBackClick()}>
       &#8617;
     </button>
   </div>
@@ -39,11 +40,18 @@ const DatePicker = ({
   futureLoaded,
   formattedDate,
   predictionsFuture,
+  onBackClick,
 }) => (
   <div className="datePicker">
     {futureLoaded ? (
       <FuturePredictions
-        {...{ futureLoaded, formattedDate, predictionsFuture, hilo }}
+        {...{
+          futureLoaded,
+          formattedDate,
+          predictionsFuture,
+          hilo,
+          onBackClick,
+        }}
       />
     ) : (
       <Calendar
@@ -68,6 +76,7 @@ DatePicker.propTypes = {
   futureLoaded: PropTypes.bool,
   ormattedDate: PropTypes.string,
   predictionsFuture: PropTypes.array,
+  onBackClick: PropTypes.func,
 };
 
 export default DatePicker;

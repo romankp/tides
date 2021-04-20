@@ -77,6 +77,7 @@ class Root extends Component {
   constructor(props) {
     super(props);
     this.handleDateChange = this.handleDateChange.bind(this);
+    this.showDatePicker = this.showDatePicker.bind(this);
     this.state = {
       currentDateString: getCurrentDateString(currentTime),
       loaded: false,
@@ -107,6 +108,12 @@ class Root extends Component {
         pickedDate: getCurrentDateString(pickedDate),
         futureLoaded: true,
       });
+    });
+  }
+
+  showDatePicker() {
+    this.setState({
+      futureLoaded: false,
     });
   }
 
@@ -141,6 +148,7 @@ class Root extends Component {
           futureLoaded={futureLoaded}
           formattedDate={pickedDate}
           predictionsFuture={predictionsFuture}
+          onBackClick={this.showDatePicker}
         />
       </div>
     );

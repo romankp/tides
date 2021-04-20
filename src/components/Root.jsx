@@ -142,17 +142,6 @@ class Root extends Component {
           formattedDate={pickedDate}
           predictionsFuture={predictionsFuture}
         />
-        {/* {futureLoaded && (
-          <Today
-            predictions={truncatePredictions(
-              currentTime,
-              predictionsToday,
-              nextTime
-            )}
-            date={currentDateString}
-            nextEvent={nextEvent}
-          />
-        )} */}
       </div>
     );
   }

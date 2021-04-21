@@ -8,13 +8,15 @@ const hilo = {
   L: 'low',
 };
 
+// onClick={onBackClick()}
+
 const PickedDate = ({
   // futureLoaded,
   formattedDate,
   predictionsFuture,
   onBackClick,
 }) => (
-  <div className="futureLoaded">
+  <div className="pickedDate">
     <h2>{formattedDate}</h2>
     <ol>
       {predictionsFuture.map(({ type, t }) => {
@@ -25,9 +27,9 @@ const PickedDate = ({
         );
       })}
     </ol>
-    {/* <button className={'back'} type="button" onClick={onBackClick()}>
+    <button className={'back'} type="button">
       &#8617;
-    </button> */}
+    </button>
   </div>
 );
 

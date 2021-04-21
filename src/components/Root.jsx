@@ -6,6 +6,7 @@ import {
 } from '../utils/componentUtils.js';
 import Today from './Today';
 import DatePicker from './DatePicker';
+import PickedDate from './PickedDate';
 
 // We don't destructure here because of a limitation in how Parcel interacts with .env variables
 const baseUrl = process.env.BASE_URL;
@@ -142,14 +143,22 @@ class Root extends Component {
             nextEvent={nextEvent}
           />
         </div>
-        <DatePicker
-          date={currentTime}
-          onDateChange={this.handleDateChange}
-          futureLoaded={futureLoaded}
-          formattedDate={pickedDate}
-          predictionsFuture={predictionsFuture}
-          onBackClick={this.showDatePicker}
-        />
+        {futureLoaded ? (
+          <PickedDate
+            formattedDate={pickedDate}
+            predictionsFuture={predictionsFuture}
+            onBackClick={this.showDatePicker}
+          />
+        ) : (
+          <DatePicker
+            date={currentTime}
+            onDateChange={this.handleDateChange}
+            // futureLoaded={futureLoaded}
+            // formattedDate={pickedDate}
+            // predictionsFuture={predictionsFuture}
+            // onBackClick={this.showDatePicker}
+          />
+        )}
       </div>
     );
   }

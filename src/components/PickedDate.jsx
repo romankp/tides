@@ -8,14 +8,7 @@ const hilo = {
   L: 'low',
 };
 
-// onClick={onBackClick()}
-
-const PickedDate = ({
-  // futureLoaded,
-  formattedDate,
-  predictionsFuture,
-  onBackClick,
-}) => (
+const PickedDate = ({ formattedDate, predictionsFuture, onBackClick }) => (
   <div className="pickedDate">
     <h2>{formattedDate}</h2>
     <ol>
@@ -27,14 +20,13 @@ const PickedDate = ({
         );
       })}
     </ol>
-    <button className={'back'} type="button">
+    <button className={'back'} type="button" onClick={onBackClick}>
       &#8617;
     </button>
   </div>
 );
 
 PickedDate.propTypes = {
-  // futureLoaded: PropTypes.bool,
   formattedDate: PropTypes.string,
   predictionsFuture: PropTypes.array,
   onBackClick: PropTypes.func,

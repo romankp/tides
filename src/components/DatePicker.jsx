@@ -5,14 +5,7 @@ import 'react-calendar/dist/Calendar.css';
 
 // Tide prediction is limited to 10 years from current date
 
-const DatePicker = ({
-  date,
-  onDateChange,
-  // futureLoaded,
-  // formattedDate,
-  // predictionsFuture,
-  // onBackClick,
-}) => (
+const DatePicker = ({ date, onDateChange }) => (
   <div className="datePicker">
     <Calendar
       calendarType="US"

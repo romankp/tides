@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { localizeTime } from '../utils/componentUtils.js';
 
-// Tide prediction is limited to 10 years from current date
 const hilo = {
   H: 'high',
   L: 'low',

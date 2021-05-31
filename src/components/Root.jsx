@@ -20,6 +20,7 @@ const endDate = constructQueryDate(currentTime, isAfterCutoff);
 const urlFull = buildFullURL(baseUrl, stationId, startDate, endDate);
 
 const fetchTideData = async url => {
+  console.log('Fetching tide data.');
   try {
     const response = await fetch(url);
     return await response.json();
@@ -92,23 +93,28 @@ class Root extends Component {
 
   componentDidMount() {
     fetchTideData(urlFull).then(({ predictions }) => {
+      console.log('Tide data received.');
       this.setState({
         predictionsToday: predictions,
         nextEvent: returnNextEvent(predictions),
         loaded: true,
       });
+      console.log('State updated.');
     });
   }
 
   handleDateChange(pickedDate) {
     const queryDate = constructQueryDate(pickedDate, false);
     const updatedURL = buildFullURL(baseUrl, stationId, queryDate, queryDate);
+    console.log('Date updated.');
     fetchTideData(updatedURL).then(({ predictions }) => {
+      console.log(`Updated date's tide data received.`);
       this.setState({
         predictionsFuture: predictions,
         pickedDate: getCurrentDateString(pickedDate),
         futureLoaded: true,
       });
+      console.log('State updated.');
     });
   }
 

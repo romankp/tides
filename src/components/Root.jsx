@@ -156,14 +156,7 @@ class Root extends Component {
             onBackClick={this.showDatePicker}
           />
         ) : (
-          <DatePicker
-            date={currentTime}
-            onDateChange={this.handleDateChange}
-            // futureLoaded={futureLoaded}
-            // formattedDate={pickedDate}
-            // predictionsFuture={predictionsFuture}
-            // onBackClick={this.showDatePicker}
-          />
+          <DatePicker date={currentTime} onDateChange={this.handleDateChange} />
         )}
       </div>
     );
